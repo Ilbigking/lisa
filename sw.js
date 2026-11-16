@@ -1,8 +1,8 @@
 // Set to true if you use OneSignal: it then supplies its own push + click handlers.
-const USE_ONESIGNAL = false;
+const USE_ONESIGNAL = true;
 if (USE_ONESIGNAL) { try { importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js'); } catch (e) {} }
 
-const CACHE = 'fortnight-v1'; // bump this when you change app files
+const CACHE = 'fortnight-v2'; // bump this when you change app files
 const ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
