@@ -1,5 +1,5 @@
 /* ---------- Config ---------- */
-const ONESIGNAL_APP_ID = ''; // optional: paste your OneSignal App ID for background push (see instructions)
+const ONESIGNAL_APP_ID = '8bdecce3-a71c-4b3d-98ce-ad06517eb468'; // optional: paste your OneSignal App ID for background push (see instructions)
 const KEY = 'fortnight.v1';
 const CATS = { School: '#4f8cff', Personal: '#a066ff', Urgent: '#ff5a6a', Fun: '#ffa733' };
 const VIBES = ['⭐', '🔥', '🌿', '🎉', '💤'];
