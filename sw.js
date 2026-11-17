@@ -2,7 +2,7 @@
 const USE_ONESIGNAL = true;
 if (USE_ONESIGNAL) { try { importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js'); } catch (e) {} }
 
-const CACHE = 'fortnight-v2'; // bump this when you change app files
+const CACHE = 'lisas-planner-v3'; // bump this when you change app files
 const ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -28,7 +28,7 @@ if (!USE_ONESIGNAL) {
   self.addEventListener('push', e => {
     let d = {};
     try { d = e.data.json(); } catch (_) { d = { body: e.data ? e.data.text() : '' }; }
-    e.waitUntil(self.registration.showNotification(d.title || 'Fortnight', {
+    e.waitUntil(self.registration.showNotification(d.title || "Lisa's Planner", {
       body: d.body || 'You have a task coming up',
       icon: 'icon-192.png', badge: 'icon-192.png', data: { url: d.url || './' }
     }));

@@ -1,6 +1,6 @@
 {
-  "name": "Fortnight",
-  "short_name": "Fortnight",
+  "name": "Lisa's Planner",
+  "short_name": "Lisa's Planner",
   "description": "A lively 2-week task and reminder planner",
   "start_url": "./",
   "scope": "./",

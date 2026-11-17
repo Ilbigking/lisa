@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fortnight">
+<meta name="apple-mobile-web-app-title" content="Lisa's Planner">
 <meta name="theme-color" content="#14121f">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="style.css">
-<title>Fortnight</title>
+<title>Lisa's Planner</title>
 </head>
 <body>
-<div id="app">
+<div id="app" class="list">
   <header>
     <div><p id="hello"></p><h1>Next 14 days</h1></div>
-    <button id="openSettings" class="icon-btn" aria-label="Settings">⚙️</button>
+    <div class="tools">
+      <button id="arcBtn" class="icon-btn" aria-label="Archive">🗄️</button>
+      <button id="viewBtn" class="icon-btn" aria-label="Switch layout">▦</button>
+      <button id="openSettings" class="icon-btn" aria-label="Settings">⚙️</button>
+    </div>
   </header>
   <section id="notifBanner" hidden>
     <span>🔔 Get a nudge when tasks are due</span>
-    <button id="enableNotif">Enable</button>
+    <button class="enNotif">Enable</button>
   </section>
-  <main id="days"></main>
+  <main id="days" class="list"></main>
 </div>
 <button id="fab" aria-label="Add task">+</button>
 
@@ -32,22 +36,50 @@
   <form class="panel" id="addForm" autocomplete="off">
     <h3>New task</h3>
     <input id="fTitle" placeholder="What's the plan?" required maxlength="80">
+    <textarea id="fDesc" rows="2" maxlength="300" placeholder="Description (optional)"></textarea>
     <label>Day</label><select id="fDate"></select>
     <label>Time (optional)</label><input id="fTime" type="time">
     <label>Category</label><div class="chips" id="fCats"></div>
+    <div class="newcat" id="newCat" hidden>
+      <input id="ncName" maxlength="16" placeholder="Category name">
+      <input type="color" id="ncColor" value="#2dd4bf">
+      <button type="button" class="pill" id="ncAdd">Add</button>
+    </div>
     <label>Vibe</label><div class="chips" id="fVibes"></div>
     <button class="primary">Add task</button>
   </form>
 </div>
 
+<div class="sheet" id="arcSheet">
+  <div class="panel tall">
+    <div class="phead"><h3>Archive</h3><button class="icon-btn close" aria-label="Close">✕</button></div>
+    <div id="arcList"></div>
+  </div>
+</div>
+
 <div class="sheet" id="setSheet">
-  <div class="panel">
-    <h3>Settings</h3>
-    <button class="ghost" id="testNotif">Send test notification</button>
-    <button class="ghost" id="export">Export backup (JSON)</button>
-    <label class="ghost" for="import">Import backup…</label>
-    <input type="file" id="import" accept="application/json,.json">
-    <button class="ghost" id="closeSet">Close</button>
+  <div class="panel tall">
+    <div class="phead"><h3>Settings</h3><button class="icon-btn close" aria-label="Close">✕</button></div>
+    <p class="sec">Appearance</p>
+    <div class="group">
+      <div class="row"><span>Theme</span><div id="swatches"></div></div>
+      <div class="row"><span>Custom color</span><input type="color" id="themeColor"></div>
+      <div class="row"><span>Layout</span><div class="seg" id="viewSeg"><button data-v="list">List</button><button data-v="grid">Grid</button></div></div>
+    </div>
+    <p class="sec">Categories</p>
+    <div class="group"><div class="row chips" id="catList"></div></div>
+    <p class="sec">Reminders</p>
+    <div class="group">
+      <div class="row"><span>Notifications</span><small id="notifState"></small></div>
+      <button class="row enNotif">Enable notifications</button>
+      <button class="row" id="testNotif">Send test notification</button>
+    </div>
+    <p class="sec">Backup</p>
+    <div class="group">
+      <button class="row" id="export">Export backup (JSON)</button>
+      <input type="file" id="import" accept="application/json,.json">
+      <label class="row" for="import">Import backup…</label>
+    </div>
   </div>
 </div>
 <script src="app.js"></script>
